@@ -53,6 +53,7 @@ export default function SettingsForm({ onClose }: { onClose: () => void }) {
         const { clientId, ...rest } = values.data;
         console.log("Submitting values:", data);
         dispatch(updateSettings({ clientId, settings: rest }));
+        dispatch(setClientId(null));
         onClose();
       }}
     >
@@ -238,7 +239,10 @@ export default function SettingsForm({ onClose }: { onClose: () => void }) {
                 type="button"
                 fullWidth
                 variant="outlined"
-                onClick={onClose}
+                onClick={() => {
+                  onClose();
+                  dispatch(setClientId(null));
+                }}
                 sx={{ mt: 1 }}
               >
                 Cancel
